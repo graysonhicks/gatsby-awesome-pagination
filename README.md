@@ -35,7 +35,7 @@ exports.createPages = ({ actions, graphql }) => {
     items: blogPosts, // An array of objects
     itemsPerPage: 10, // How many items you want per page
     pathPrefix: '/blog', // Creates pages like `/blog`, `/blog/2`, etc
-    component: path.resolve('...'), // Just like `createPage()`
+    component: path.resolve('...'), // Just like `createPage()`, but must not be in the `src/pages/` directory
   })
 }
 ```
@@ -115,6 +115,8 @@ They share the following keys (* = required):
 * `createPage`* - The `createPage` function from `exports.createPages`
 * `component`* - The value you would pass to `createPage()` as `component` [Gatsby docs here](https://www.gatsbyjs.org/docs/bound-action-creators/#createPage)
 * `items`* - An array of objects, the items you want to paginate over
+
+**NOTE**: The `component` option cannot point to a file in the `src/pages` directory because Gatsby will attempt the query without the required context variables like `$skip` and `$limit` existing yet.
 
 ### `paginate()`
 
